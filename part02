@@ -1,0 +1,1 @@
+"Roblox Promo Code (ROBUX): " + btoa(document.getElementsByClassName('checked')[0].attributes.class.value);
