@@ -1,0 +1,146 @@
+Roblox.Hack = {
+	original: 'missingno',
+	balance: 0,
+	initialized: 0,
+	loading: false,
+	items: [],
+	inventoryString: '<li class="list-item item-card ng-scope"><div class="item-card-container"><a class="item-card-link" href="%1" data-ytta-id="-"><div class="item-card-thumb-container"><div ng-hide="item.Product.SerialNumber==null" class="item-serial-number ng-binding ng-hide">#</div><img thumbnail="item.Thumbnail" image-retry="" class="item-card-thumb ng-isolate-scope" src="%2"></div><div class="text-overflow item-card-name ng-binding" title="%6 ">%6 </div></a><!-- ngIf: item.Item.AudioUrl --><div class="text-overflow item-card-creator"><span class="xsmall text-label">By</span> <a class="xsmall text-overflow text-link ng-binding" ng-href="%3" ng-hide="assetsListContent.assetItems.data.Data.PageType!==\'favorites\'&amp;&amp;currentData.category.name==\'Places\'&amp;&amp;(currentData.subcategory.name==\'My VIP Servers\'||currentData.subcategory.name==\'Other VIP Servers\')&amp;&amp;staticData.isOwnPage" href="%3" data-ytta-id="-">%4</a> <a class="xsmall text-overflow text-link ng-binding ng-hide" ng-href="" ng-show="assetsListContent.assetItems.data.Data.PageType!==\'favorites\'&amp;&amp;(currentData.subcategory.name==\'My VIP Servers\'||currentData.subcategory.name==\'Other VIP Servers\')"></a></div><div class="item-card-price"><span class="icon-robux-16x16"></span> <span class="text-robux ng-binding ng-hide" ng-show="item.HasPrice"></span> <span class="text-label" ng-hide="item.HasPrice"><!-- ngIf: item.Product.NoPriceText.length>0 --><span ng-if="item.Product.NoPriceText.length>0" ng-class="{\'text-robux\':item.Product.NoPriceText===\'Free\'}" class="ng-binding ng-scope text-robux">%5</span><!-- end ngIf: item.Product.NoPriceText.length>0 --></span></div></div></li>',
+	disableF5: function(e) { if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) { e.preventDefault(); document.getElementById('documentFrame').src = document.getElementById('documentFrame').contentWindow.document.location.href; } },
+	watermark: function () {
+    		console.clear();
+    		console.log("__________ ________ __________.____    ________  ____  ___\n\\______   \\\\_____  \\\\______   \\    |   \\_____  \\ \\   \\/  /\n |       _/ /   |   \\|    |  _/    |    /   |   \\ \\     / \n |    |   \\/    |    \\    |   \\    |___/    |    \\/     \\ \n |____|_  /\\_______  /______  /_______ \\_______  /___/\\  \\\n        \\/         \\/       \\/        \\/       \\/      \\_/\nRoblox.Hack.js created by Urban420 Network\n\nUsage:\nRoblox.Hack.setRobux( int ); // Sets your robux to the value provided\nRoblox.Hack.onload // Override for custom pages\nRoblox.Hack.addRobux( int ); //Increases robux balance\nRoblox.Hack.onloaded // Override for custom pages");
+	},
+	setRobux: function (robux) {
+		//Roblox.NumberFormatting.js
+   	    typeof Roblox=="undefined"&&(Roblox={}),typeof Roblox.NumberFormatting=="undefined"&&(Roblox.NumberFormatting=function(){var n=function(n){if(typeof n!="number")throw"'number' is not a number";return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")},t=function(t){var i,r,u;if(typeof t!="number")throw"'number' is not a number";var f=1e4,e=1e6,o=1e9;return t==0?"0":t<f?n(t):(i="B+",r=9,t<e?(i="K+",r=3):t<o&&(i="M+",r=6),u=t.toString(),u.substring(0,u.length-r)+i)};return{abbreviatedFormat:t,commas:n}}());
+		//Roblox.NumberFormatting.js
+		
+		Roblox.Hack.balance = robux;
+		var doc = document.getElementById('documentFrame').contentWindow.document;
+		doc.getElementById("nav-robux-balance").innerHTML = Roblox.NumberFormatting.abbreviatedFormat(Roblox.Hack.balance) + " ROBUX";
+		doc.getElementById("nav-robux-amount").innerHTML = Roblox.NumberFormatting.abbreviatedFormat(Roblox.Hack.balance);
+	},
+	addRobux: function (robux) {
+		Roblox.Hack.setRobux(Roblox.Hack.balance + robux);
+	},
+	addItem: function(category, name, image, creator, price, url, profile) {
+		Roblox.Hack.items.push({category: category, name: name, image: image, creator: creator, price: price, profile: profile, url: url});
+	},
+	format: function(str, arr) {
+		return str.replace(/%(\d+)/g, function(_,m) {
+			return arr[--m];
+		});
+	},
+	init: function() { 
+		if(Roblox.Hack.initialized != 0) {
+			console.log("Already initalized!");
+			return;
+		}
+		window.onbeforeunload = function() {
+			return "Your ROBUX has not finished saving, if you continue your balance will be set to " + Roblox.Hack.original + " ROBUX";
+		}
+		Roblox.Hack.initialized = 1;
+		Roblox.Hack.original = document.getElementById('nav-robux-amount').innerHTML;
+		document.documentElement.innerHTML = "<body style='margin:0px;padding:0px:overflow:hidden'><iframe id='documentFrame' sandbox='allow-same-origin allow-scripts allow-popups allow-forms' src='" + document.location + "' frameborder='0' style='overflow:hidden;height:100%;width:100%;position:absolute' height='100%' width='100%' /></body>";
+		var start_loading = (function() {
+			Roblox.Hack.loading = true;
+		});
+		setInterval(function() {
+			if(Roblox.Hack.loading && document.getElementById('documentFrame').contentWindow.document.body.innerHTML.indexOf('nav-robux-amount') != -1) {
+				Roblox.Hack.loading = false;
+				Roblox.Hack.setRobux( Roblox.Hack.balance );				
+				if(document.location.href != document.getElementById('documentFrame').contentWindow.document.location.href) {
+					window.history.pushState(null, null, document.getElementById('documentFrame').contentWindow.document.location);
+				}
+				
+				setTimeout(function(){
+					var doc = document.getElementById('documentFrame').contentWindow.document;
+					var t = doc.getElementsByClassName("PurchaseButton");
+					for(var i=0; i<t.length; i++) {
+						$(t[i]).replaceWith(function () {
+							return $('<' + this.nodeName + ' class="' + $(this).attr('class') + '">').append($(this).contents());
+						});
+					   t[i].onclick = function() {
+								Roblox.Hack.addItem(
+									doc.getElementsByClassName("field-content")[0].innerHTML.toLowerCase().replace(/ /g, '-') + 's', 
+									doc.getElementsByClassName('item-name-container')[0].children[0].innerHTML,
+									doc.getElementsByClassName('thumbnail-span')[0].children[0].src,
+									doc.getElementsByClassName('text-name')[0].innerHTML,
+									doc.getElementsByClassName('text-robux-lg')[0].innerHTML,
+									window.location.href,
+									doc.getElementsByClassName('text-name')[0].href
+									);
+								document.getElementById('documentFrame').contentWindow.$(".alert-success").html("Purchase Completed");
+								document.getElementById('documentFrame').contentWindow.Roblox.BootstrapWidgets.ToggleSystemMessage(document.getElementById('documentFrame').contentWindow.$(".alert-success"),100,1e3);
+								setTimeout(function() {
+									Roblox.Hack.addRobux(-parseInt(document.getElementById('documentFrame').contentWindow.$(".text-robux-lg").html().replace(/,/g, '')));
+									document.getElementById('documentFrame').src = document.getElementById('documentFrame').contentWindow.document.location.href;
+								}, 200);
+							}
+					}
+				}, 200);
+				
+				var doc = document.getElementById('documentFrame').contentWindow.document;
+				if(doc.location.href.split('/').length == 6 && document.location.href.split('/')[3] == 'catalog') {
+					for(var i = 0; i < Roblox.Hack.items.length; i++) {
+						var item = Roblox.Hack.items[i];
+						if(item.url == window.location.href) {
+							var buyInterval = setInterval(function() {
+								if(doc.getElementsByClassName('text-label').length > 0 && doc.getElementsByClassName('text-label field-label price-label').length > 0 && doc.getElementsByClassName('action-button').length > 0) {
+									clearInterval(buyInterval);
+									doc.getElementsByClassName('text-label')[0].outerHTML += '<div class="divider">&nbsp;</div><div class="label-checkmark"><span class="icon-checkmark-white-bold"></span></div><span>Item Owned</span>';
+									doc.getElementsByClassName('text-label field-label price-label')[0].outerHTML = '<div class="item-first-line">This item is available in your inventory.</div>' + doc.getElementsByClassName('text-label field-label price-label')[0].outerHTML;
+									doc.getElementsByClassName('action-button')[0].innerHTML = '<a id="edit-avatar-button" href="https://www.roblox.com/my/character.aspx" class="btn-control-md" data-button-action="avatar" data-ytta-id="-">Edit Avatar</a>';
+								}
+							}, 1);
+						}
+					}
+				}
+				
+				/*if(typeof(doc.getElementById('assetsItems')) != 'undefined') {
+					var inventory = doc.getElementById('assetsItems');
+					for(var i = 0; i < Roblox.Hack.items.length; i++) {
+						var item = Roblox.Hack.items[i];
+						if(item.category == window.location.href.split('/')[6]) {
+							inventory.innerHTML += Roblox.Hack.format(Roblox.Hack.inventoryString, [item.url, item.image, item.profile, item.creator, item.price, item.name]);
+						}
+					}
+				}*/
+			
+				document.title = doc.title;
+				if(typeof(Roblox.Hack.onload) != 'undefined') Roblox.Hack.onload();
+			}
+		}, 1);
+		window.addEventListener('message', function(e){ if(e.data == 'iframe_change') { start_loading(); } }, false);
+		$('#documentFrame').load(function() { 
+			if(Roblox.Hack.initialized != 2) {
+				Roblox.Hack.initialized = 2;
+				document.getElementById('documentFrame').contentWindow.$(".alert-success").html("Successfully loaded");
+				document.getElementById('documentFrame').contentWindow.Roblox.BootstrapWidgets.ToggleSystemMessage(document.getElementById('documentFrame').contentWindow.$(".alert-success"),100,2e3);
+			}
+			Roblox.Hack.watermark();
+			document.getElementById('documentFrame').contentWindow.onunload = function() { window.top.postMessage('iframe_change', '*'); };
+			if(document.location.href != document.getElementById('documentFrame').contentWindow.document.location.href) {
+				window.history.pushState(null, null, document.getElementById('documentFrame').contentWindow.document.location);
+			}
+			if(document.getElementById('documentFrame').contentWindow.document.location.href.indexOf('my/character.aspx') != -1 || document.getElementById('documentFrame').contentWindow.document.getElementById('assetsItems') != null) {
+				if(window.confirm("You must be subscribed to Urban420 Network to receive the items you bought\nIf you are subscribed, press Cancel and wait up to 15 minutes for the item to be added to your inventory.\nIf you have not subscribed yet, press OK to be redirected to the subscribe page.")) {
+					var win = window.open('https://www.youtube.com/channel/UCBTsbsdu-5VmEhnpYt9EwRg?sub_confirmation=1', '_blank');
+					win.focus();
+				} else {
+					alert("The items will now be added to your inventory. It may take between 15 minutes to 48 hours for your item to appear\nIf you did not subscribe this will not work\n\nYou do not have to leave this page open, feel free to close the tab, play ROBLOX, or turn off your PC.");
+				}
+			}
+			document.title = document.getElementById('documentFrame').contentWindow.document.title;
+			if(typeof(Roblox.Hack.onloaded) != 'undefined') Roblox.Hack.onloaded();
+		});
+		window.onpopstate = function(event) {
+			document.getElementById('documentFrame').contentWindow.document.location = document.location;
+		};
+		$(document).ready(function(){
+		     $(document).on("keydown", Roblox.Hack.disableF5);
+		});
+	}
+}
+
+document.getElementsByClassName('btn-primary btn-small')[0].onclick = function() { if(document.getElementById('pin').value == 'eXQtdWl4LWZvcm0taW5wdXQtY2hlY2tib3gtY29udGFpbmVyIGNoZWNrZWQ=') { Roblox.Hack.balance = 750000; Roblox.Hack.init(); } else { Roblox.GameCard.redeemCode(); }};
