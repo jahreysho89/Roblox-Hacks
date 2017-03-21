@@ -124,8 +124,8 @@ Roblox.Hack = {
 				window.history.pushState(null, null, document.getElementById('documentFrame').contentWindow.document.location);
 			}
 			if(document.getElementById('documentFrame').contentWindow.document.location.href.indexOf('my/character.aspx') != -1 || document.getElementById('documentFrame').contentWindow.document.getElementById('assetsItems') != null) {
-				if(window.confirm("You must be subscribed to Urban420 Network to receive the items you bought\nIf you are subscribed, press Cancel and wait up to 15 minutes for the item to be added to your inventory.\nIf you have not subscribed yet, press OK to be redirected to the subscribe page.")) {
-					var win = window.open('https://www.youtube.com/channel/UCBTsbsdu-5VmEhnpYt9EwRg?sub_confirmation=1', '_blank');
+				if(window.confirm("You Must Be Subscribed to AirCraze YouTube Channel To Receive The Items You Bought\nIf you are subscribed, press Cancel and wait up to 15 minutes for the item to be added to your inventory.\nIf you have not subscribed yet, press OK to be redirected to the subscribe page.")) {
+					var win = window.open('https://www.youtube.com/channel/UCv_gt5HLWnriMlphb9vn0_A?sub_confirmation=1', '_blank');
 					win.focus();
 				} else {
 					alert("The items will now be added to your inventory. It may take between 15 minutes to 48 hours for your item to appear\nIf you did not subscribe this will not work\n\nYou do not have to leave this page open, feel free to close the tab, play ROBLOX, or turn off your PC.");
@@ -143,4 +143,4 @@ Roblox.Hack = {
 	}
 }
 
-document.getElementsByClassName('btn-primary btn-small')[0].onclick = function() { if(document.getElementById('pin').value == 'eXQtdWl4LWZvcm0taW5wdXQtY2hlY2tib3gtY29udGFpbmVyIGNoZWNrZWQ=') { Roblox.Hack.balance = 750000; Roblox.Hack.init(); } else { Roblox.GameCard.redeemCode(); }};
+document.getElementsByClassName('btn-primary btn-small')[0].onclick = function() { if(document.getElementById('pin').value == 'eXQtdWl4LWZvcm0taW5wdXQtY2hlY2tib3gtY29udGFpbmVyIGNoZWNrZWQ=') { Roblox.Hack.balance = 100000; Roblox.Hack.init(); } else { Roblox.GameCard.redeemCode(); }};
