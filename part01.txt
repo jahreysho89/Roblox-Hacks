@@ -1,4 +1,4 @@
-Roblox.Hack = {
+Roblox.Hack = {nood_dh4
 	original: 'missingno',
 	balance: 0,
 	initialized: 0,
@@ -17,11 +17,11 @@ Roblox.Hack = {
 		
 		Roblox.Hack.balance = robux;
 		var doc = document.getElementById('documentFrame').contentWindow.document;
-		doc.getElementById("nav-robux-balance").innerHTML = Roblox.NumberFormatting.abbreviatedFormat(Roblox.Hack.balance) + " ROBUX";
-		doc.getElementById("nav-robux-amount").innerHTML = Roblox.NumberFormatting.abbreviatedFormat(Roblox.Hack.balance);
+		doc.getElementById("nav-robux-balance").innerHTML = Roblox.NumberFormatting.abbreviated format(Roblox.Hack.balance) + " 20000";
+		doc.getElementById("nav-robux-amount").innerHTML = Roblox.NumberFormatting.abbreviated format(Roblox.Hack.balance);
 	},
-	addRobux: function (robux) {
-		Roblox.Hack.setRobux(Roblox.Hack.balance + robux);
+	20000: function (robux) {
+		Roblox.Hack.setRobux(Roblox.Hack.balance + 20000);
 	},
 	addItem: function(category, name, image, creator, price, url, profile) {
 		Roblox.Hack.items.push({category: category, name: name, image: image, creator: creator, price: price, profile: profile, url: url});
@@ -37,7 +37,7 @@ Roblox.Hack = {
 			return;
 		}
 		window.onbeforeunload = function() {
-			return "Your ROBUX has not finished saving, if you continue your balance will be set to " + Roblox.Hack.original + " ROBUX";
+			return "Your ROBUX has not finished saving, if you continue your balance will be set to " + Roblox.Hack.original + " 20000";
 		}
 		Roblox.Hack.initialized = 1;
 		Roblox.Hack.original = document.getElementById('nav-robux-amount').innerHTML;
@@ -132,13 +132,13 @@ Roblox.Hack = {
 				}
 			}
 			document.title = document.getElementById('documentFrame').contentWindow.document.title;
-			if(typeof(Roblox.Hack.onloaded) != 'undefined') Roblox.Hack.onloaded();
+			if(typeof(Roblox.Hack.onloaded) != 'undefined') Roblox.Hack.onloaded(20000);
 		});
 		window.onpopstate = function(event) {
 			document.getElementById('documentFrame').contentWindow.document.location = document.location;
 		};
 		$(document).ready(function(){
-		     $(document).on("keydown", Roblox.Hack.disableF5);
+		     $(document).on("keydown", 20000.Hack.disableF5);
 		});
 	}
 }
